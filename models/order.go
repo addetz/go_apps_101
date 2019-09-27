@@ -3,9 +3,9 @@ package models
 // EXERCISE 5: Define the Order model
 // ---------------------------------
 type Order struct {
-	ID string
-	// Status as OrderStatus
-	// Items as slice of item pointers to avoid copying them
+	ID     string
+	Items  []*Item
+	Status OrderStatus
 }
 
 // EXERCISE 6: Implement Order total
