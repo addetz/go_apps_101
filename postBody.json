@@ -1,0 +1,8 @@
+ {
+  "Items":
+  [
+    {"id":"item-burger","name":"Burger","price":10,"currency_code":"GBP"},
+    {"id":"item-pizza","name":"Pizza","price":12.5,"currency_code":"GBP"}
+  ],
+    "status":0
+  }
