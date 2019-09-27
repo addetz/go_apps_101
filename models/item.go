@@ -3,10 +3,10 @@ package models
 // EXERCISE 1: Define Item struct
 // ----------------------------
 type Item struct {
-	// define ID as string,
-	// Name as string
-	// Price as float64,
-	// CurrencyCode as string
+    ID string
+    Name string
+    Price float64
+    CurrencyCode string
 }
 
 // EXERCISE 3: Print the price of a menu Item
