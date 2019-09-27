@@ -7,10 +7,26 @@ import (
 
 	"github.com/go_apps_101/db"
 	"github.com/go_apps_101/handlers"
+	"github.com/go_apps_101/models"
 	"github.com/go_apps_101/repo"
 )
 
 func main() {
+	burger := models.Item{
+		ID:           "item-burger",
+		Name:         "Burger",
+		Price:        10.0,
+		CurrencyCode: "GBP",
+	}
+	pizza := models.Item{
+		ID:           "item-pizza",
+		Name:         "Pizza",
+		Price:        12.5,
+		CurrencyCode: "GBP",
+	}
+	fmt.Printf("%v \n", burger)
+	fmt.Printf("%v \n", pizza)
+
 	orderRepo := &repo.OrderRepo{
 		DB: db.InitDB(),
 	}
@@ -20,6 +36,12 @@ func main() {
 
 	// EXERCISE 8: Create & save an order
 	// --------------------------------
+	// An order for a starting point
+	order := models.Order{
+		Items:  []*models.Item{&burger, &pizza},
+		Status: models.ACCEPTED,
+	}
+	orderRepo.Upsert(&order)
 
 	// Server config
 	router := handlers.ConfigureServer(handler)

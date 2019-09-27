@@ -1,8 +1,14 @@
 package models
 
+
 // EXERCISE 3: Define the OrderStatus constant using iota
 // ----------------------------------------------------
-type OrderStatus int //Underlying type
+
+type OrderStatus int
 const (
-    //define ACCEPTED, PREPARING, DELIVERING, COMPLETED, REJECTED  statuses here
+    ACCEPTED OrderStatus = iota
+    PREPARING
+    DELIVERING
+    COMPLETED
+    REJECTED
 )
