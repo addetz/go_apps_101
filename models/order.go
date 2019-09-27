@@ -4,8 +4,8 @@ package models
 // ---------------------------------
 type Order struct {
 	ID string
-	// Status as OrderStatus
-	// Items as slice of item pointers to avoid copying them
+	Items  []*Item
+	Status OrderStatus
 }
 
 // EXERCISE 6: Implement Order total
