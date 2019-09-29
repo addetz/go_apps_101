@@ -4,5 +4,9 @@ package models
 // ----------------------------------------------------
 type OrderStatus int //Underlying type
 const (
-    //define ACCEPTED, PREPARING, DELIVERING, COMPLETED, REJECTED  statuses here
+	ACCEPTED = iota
+	PREPARING
+	DELIVERING
+	COMPLETED
+	REJECTED
 )
