@@ -72,6 +72,10 @@ func (h *Handler) OrderUpsert(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		writeResponse(w, http.StatusInternalServerError, fmt.Errorf("invalid order body:%v", err))
 	}
+
+	if err != nil {
+		writeResponse(w, http.StatusInternalServerError, fmt.Errorf("invalid order body:%v", err))
+	}
 	// Unmarshal response to order var
 	// Handle any errors & write an error HTTP status & response
 	if err := json.Unmarshal(body, &order); err != nil {
