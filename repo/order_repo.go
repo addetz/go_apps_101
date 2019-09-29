@@ -15,24 +15,24 @@ type OrderRepo struct {
 
 // FindAll returns all orders existing from the database
 func (or *OrderRepo) FindAll() []models.Order {
-	// implementation here
-	return []models.Order{}
+	return or.DB.FindAllOrders()
 }
 
 // Find returns an order with a specific id from the database
 func (or *OrderRepo) Find(id string) (*models.Order, error) {
-	// implementation here
-	return nil, nil
+	order, err := or.DB.FindOrder(id)
+	if err != nil {
+		return nil, err
+	}
+	return &order, nil
 }
 
 // Upsert inserts or updates a model into the database
 func (or *OrderRepo) Upsert(o *models.Order) error {
-	// implementation here
-	return nil
+	return or.DB.UpsertOrder(*o)
 }
 
 // Delete deletes a model from the database
 func (or *OrderRepo) Delete(id string) error {
-	// implementation here
-	return nil
+	return or.DB.DeleteOrder(id)
 }
