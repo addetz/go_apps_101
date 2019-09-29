@@ -11,6 +11,9 @@ type Order struct {
 // EXERCISE 6: Implement Order total
 // -------------------------------
 func (or Order) Total() float64 {
-	//implement total here
-	return 0.0
+	var sum float64
+	for _, item := range or.Items {
+		sum += item.Price
+	}
+	return sum
 }
