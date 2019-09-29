@@ -28,8 +28,10 @@ func (h *Handler) Index(w http.ResponseWriter, r *http.Request) {
 // OrderIndex is invoked by HTTP GET /orders
 func (h *Handler) OrderIndex(w http.ResponseWriter, r *http.Request) {
 	// Call the repository method corresponding to the operation
+	orders := h.Repo.FindAll()
 
 	// Send an HTTP success status & the return value from the repo
+	writeResponse(w, http.StatusOK, orders)
 }
 
 // OrderShow is invoked by HTTP GET /orders/orderId
@@ -47,20 +49,6 @@ func (h *Handler) OrderShow(w http.ResponseWriter, r *http.Request) {
 	writeResponse(w, http.StatusOK, order)
 }
 
-// EXERCISE 9: Implement OrderIndex & OrderDelete
-// ----------------------------------------------
-
-// OrderDelete is invoked by HTTP DELETE /orders/orderId
-func (h *Handler) OrderDelete(w http.ResponseWriter, r *http.Request) {
-	//Get the orderId as a route variable
-	//vars := mux.Vars(r)
-	//orderId := vars["orderId"]
-	// Call the repository method corresponding to the operation
-
-	// Handle any errors & write an error HTTP error status & response
-
-	// Send an HTTP success status & response
-}
 
 // OrderShow is invoked by HTTP POST /orders
 func (h *Handler) OrderUpsert(w http.ResponseWriter, r *http.Request) {
@@ -72,15 +60,40 @@ func (h *Handler) OrderUpsert(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		writeResponse(w, http.StatusInternalServerError, fmt.Errorf("invalid order body:%v", err))
 	}
+
+	if err != nil {
+		writeResponse(w, http.StatusInternalServerError, fmt.Errorf("invalid order body:%v", err))
+	}
 	// Unmarshal response to order var
 	// Handle any errors & write an error HTTP status & response
 	if err := json.Unmarshal(body, &order); err != nil {
 		writeResponse(w, http.StatusUnprocessableEntity, fmt.Errorf("invalid order body:%v", err))
 	}
+
 	// Call the repository method corresponding to the operation
+	err = h.Repo.DB.UpsertOrder(order)
+
 	err = h.Repo.DB.UpsertOrder(order)
 	// Send an HTTP success status & the return value from the repo
 	writeResponse(w, http.StatusOK, err)
+}
+// EXERCISE 9: Implement OrderIndex & OrderDelete
+// ----------------------------------------------
+
+// OrderDelete is invoked by HTTP DELETE /orders/orderId
+func (h *Handler) OrderDelete(w http.ResponseWriter, r *http.Request) {
+	//Get the orderId as a route variable
+	vars := mux.Vars(r)
+	orderId := vars["orderId"]
+
+	// Call the repository method corresponding to the operation
+	// Handle any errors & write an error HTTP error status & response
+	if err := h.Repo.Delete(orderId); err != nil {
+		writeResponse(w, http.StatusNotFound, fmt.Errorf("no order with id %s to be deleted:%v", orderId, err))
+	}
+
+	// Send an HTTP success status & response
+	writeResponse(w, http.StatusOK, fmt.Sprintf("Order with id %s deleted", orderId))
 }
 
 // writeResponse is a helper method that allows to write and HTTP status & response
