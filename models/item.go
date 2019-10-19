@@ -19,7 +19,6 @@ func (i Item) PrintWithPrice() string {
 	//NOTE: fmt.Sprintf allows us to format strings just like with fmt.Println
 	//https://golang.org/pkg/fmt/#Sprintf
 	// Use the format string "%s: %v%s"
-	return ""
     return fmt.Sprintf("%s: %v%s", i.Name, i.Price, i.CurrencyCode)
 }
 

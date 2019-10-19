@@ -37,11 +37,6 @@ func main() {
 	// EXERCISE 8: Create & save an order
 	// --------------------------------
 	// An order for a starting point
-	order := models.Order{
-		Items:  []*models.Item{&burger, &pizza},
-		Status: models.ACCEPTED,
-	}
-	orderRepo.Upsert(&order)
 
 	// Server config
 	router := handlers.ConfigureServer(handler)
